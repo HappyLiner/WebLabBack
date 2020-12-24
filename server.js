@@ -117,7 +117,11 @@ app.post('/favourites/:city', cors(corsOptions), async (request, response) => {
         })
     }
     else {
-        response.json(responseFailed)
+        if(weatherResponse.message === 'city not found') {
+            response.status(404).send(responseFailed)
+        } else {
+            response.json(responseFailed)
+        }
     }
 })
 
